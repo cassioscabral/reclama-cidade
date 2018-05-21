@@ -5,13 +5,13 @@ const postComplain = {
         {
           url,
           title,
-          // complainText: complainText,
+          complainText,
           location,
           cpf,
           'info': `Publicado por ${username}`,
           'created_at': -1 * new Date().getTime()
         })
-        .then(this.$router.go('home'))
+        .then(this.$router.push('/'))
         .catch((e) => {
           console.log('Error on postComplain: ', e)
         })

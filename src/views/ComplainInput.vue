@@ -23,8 +23,12 @@
             <input id="location" v-model="location" type="text" class="mdl-textfield__input"/>
             <label for="location" class="mdl-textfield__label">Endereço:</label>
           </div>
+          <div v-if="position" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-dirty">
+            <input disabled id="position" v-model="position" type="text" class="mdl-textfield__input"/>
+            <label for="position" class="mdl-textfield__label">Posição GPS:</label>
+          </div>
 
-          <div class="demo-card-image mdl-card mdl-shadow--2dp">
+          <div class="demo-card-image mdl-card mdl-shadow--2dp" v-if="imageUrl">
             <div class="mdl-card__title mdl-card--expand">
               <img :src="imageUrl" alt="">
             </div>
@@ -33,7 +37,7 @@
             </div>
           </div>
           <div class="actions">
-            <a @click.prevent="postTheComplain" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+            <a @click.prevent="postTheComplain" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" :class="{'mdl-button--disabled': !hasUploadedImage}">
               Reclamar
             </a>
             <button class="take-picture-button mdl-button mdl-js-button mdl-button--fab mdl-button--colored" @click="toggleCamera">
@@ -61,10 +65,22 @@
         'complainText': '',
         'cpf': '',
         'location': '',
-        'username': ''
+        'username': '',
+        'position': null
       }
     },
     mounted () {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.position = `${position.coords.latitude} ; ${position.coords.longitude}`
+      })
+    },
+    computed: {
+      hasUploadedImage () {
+        return  this.imageUrl && this.imageUrl.length > 0
+      },
+      hasTitle () {
+        return this.title && this.title.length > 0
+      }
     },
     methods: {
       toggleCamera () {

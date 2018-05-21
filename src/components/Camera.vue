@@ -29,8 +29,10 @@ export default {
       return imageCapture.grabFrame()
       .then(imgBitMap => {
         let canvas = document.createElement('canvas');
+        canvas.width = imgBitMap.width;
+        canvas.height = imgBitMap.height;
         let context = canvas.getContext('2d');
-        context.drawImage(imgBitMap, 0, 0, imgBitMap.width, imgBitMap.height)
+        context.drawImage(imgBitMap, 0, 0)
         const imageQualityConversion = 0.90
         canvas.toBlob((blob) => {
           console.log(blob)

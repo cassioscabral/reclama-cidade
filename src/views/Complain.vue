@@ -17,6 +17,7 @@
           <span>{{ picture.complainText }}</span>
         </div>
         <div class="comment">
+          <label for="">Endereço:</label>
           <span>{{ picture.location }}</span>
         </div>
         <div class="actions">

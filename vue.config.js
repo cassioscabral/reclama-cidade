@@ -5,8 +5,8 @@ const PRODUCTION = process.env.NODE_ENV === 'production'
 module.exports = {
   lintOnSave: false,
   configureWebpack: {
-    plugins: [
-      PRODUCTION ? new SWPrecacheWebpackPlugin({cacheId: SERVICE_WORKER_CACHEID,
+    plugins: PRODUCTION ? [
+      new SWPrecacheWebpackPlugin({cacheId: SERVICE_WORKER_CACHEID,
         filename: SERVICE_WORKER_FILENAME,
         staticFileGlobs: ['dist/**/*.{js,html,css}'],
         minify: true,
@@ -25,7 +25,7 @@ module.exports = {
             handler: 'cacheFirst'
           },
           {
-            urlPattern: /^https:\/\/thecatapi\.com\/api\/images\/get\.php\?id/,
+            urlPattern: /^https:\/\/firebasestorage\.googleapis\.com/,
             handler: 'cacheFirst'
           },
           {
@@ -37,7 +37,7 @@ module.exports = {
             handler: 'cacheFirst'
           }
         ]
-      }) : null
-    ]
+      })
+    ] : []
   }
 }
