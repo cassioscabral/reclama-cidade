@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 import './registerServiceWorker'
 import Vuefire from 'vuefire'
-import firebase from './services/firebase'
+import {database} from './services/firebase'
 import VueResource from 'vue-resource'
 
 Vue.use(VueResource)
@@ -15,7 +15,7 @@ Vue.config.productionTip = false
 new Vue({
   router,
   firebase: {
-    complain: firebase.database.ref('complain').orderByChild('created_at')
+    complain: database.ref('complain').orderByChild('created_at')
   },
   store,
   render: h => h(App)

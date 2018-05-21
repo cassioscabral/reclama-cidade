@@ -13,6 +13,12 @@
         <div class="comment">
           <span>{{ picture.title }}</span>
         </div>
+        <div class="comment">
+          <span>{{ picture.complainText }}</span>
+        </div>
+        <div class="comment">
+          <span>{{ picture.location }}</span>
+        </div>
         <div class="actions">
           <router-link class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" to="/complainInput">
             Faça a sua reclamação também
